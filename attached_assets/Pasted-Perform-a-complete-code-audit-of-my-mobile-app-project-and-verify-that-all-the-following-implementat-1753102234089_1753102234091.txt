@@ -1,0 +1,55 @@
+Perform a complete code audit of my mobile app project and verify that all the following implementations are correctly in place. Check both frontend and backend folders. Ensure everything is functional, error-free, and production-ready.
+
+---
+
+### ✅ UI/UX Overhaul Check
+
+- Confirm that **all screens and components** have been redesigned using a **modern, aesthetic style** with:
+  - SVGs, custom icons, and illustrations
+  - Glassmorphism or neumorphism-style cards
+  - Smooth transitions, hover/press animations
+  - White, Dark Gold, and Navy Blue as the main color palette
+- Inspect **Login/Register**, Chat, Profile, Call UI, Settings, and all other screens for consistency with new design rules.
+
+---
+
+### ✅ Functional Verifications
+
+1. **Audio/Video Calling:**
+   - Confirm calls are sent and **received in real-time across devices**.
+   - Ensure call screens show caller photo, name, and call type (audio/video).
+   - Check all **call controls**: mic mute, cam toggle, speaker, and end call buttons.
+
+2. **Voice Notes:**
+   - Confirm the ability to record, send, and receive voice notes.
+   - Ensure backend upload and frontend playback works without delay or error.
+
+3. **Real-Time Chat:**
+   - Ensure messages show up **instantly on the receiver’s screen** without needing to refresh or reopen the chat.
+   - Verify live listeners or WebSocket implementation is correctly active and not breaking on session change.
+
+---
+
+### 🧹 Cleanup Verification
+
+- Confirm that `ActivitiesScreen` or `StatusScreen` (whichever was present) has been:
+  - Fully deleted from the codebase (UI, navigation, logic, assets)
+  - All related dependencies/packages also removed
+
+- Check that **no unused packages or imports** are present.
+- Ensure the project is lightweight, organized, and optimized.
+
+---
+
+### 🧪 Stability & Error Check
+
+- Run a **complete lint and syntax check** on the project.
+- Ensure no unresolved imports, runtime crashes, or logic errors.
+- Confirm project builds successfully and behaves correctly in **both Android and iOS environments** (or web simulator if mobile unavailable).
+
+---
+
+Now scan the entire project and list:
+1. ✅ What is fully implemented and working correctly
+2. ❌ What is missing, buggy, or needs improvement
+3. 📌 Suggestions to further improve performance or UI

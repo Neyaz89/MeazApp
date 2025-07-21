@@ -1,0 +1,76 @@
+modules = ["nodejs-20"]
+run = "npm run dev"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "npm run dev"]
+
+[workflows]
+runButton = "Start Expo Development Server"
+
+[[workflows.workflow]]
+name = "Start Expo Dev Server"
+author = 44537564
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo start --web --port 5000"
+
+[[workflows.workflow]]
+name = "Expo Web Preview"
+author = 44537564
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo start --web --port 5000"
+
+[[workflows.workflow]]
+name = "Expo Tunnel (Mobile Preview)"
+author = 44537564
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo start --tunnel"
+
+[[workflows.workflow]]
+name = "Install Dependencies and Start Expo"
+author = 45330659
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --save-dev typescript @types/react @types/react-dom"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo install --fix"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo start --web --port 5000"
+
+[[workflows.workflow]]
+name = "Start Expo Development Server"
+author = 45330659
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install --legacy-peer-deps"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx expo start --web --port 5000"
+
+[[ports]]
+localPort = 5000
+externalPort = 80

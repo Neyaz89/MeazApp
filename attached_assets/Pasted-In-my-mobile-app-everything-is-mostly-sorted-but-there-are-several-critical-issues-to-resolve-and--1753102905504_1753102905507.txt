@@ -1,0 +1,84 @@
+In my mobile app everything is mostly sorted, but there are several critical issues to resolve and **a full UI/UX redesign** to implement. I want you to make all of the following changes **without asking for confirmation** or requiring follow-up. Proceed in one go, and make the app **production-ready, clean, aesthetic, and bug-free.**
+
+---
+
+### 🔧 Fix Critical Functional Issues
+
+1. **Calling (Audio/Video) Fixes:**
+   - Fix the issue where calls initiated from one device are saved in the call table but **not received** on the other device.
+   - Inspect both **frontend and backend**: signaling, listeners, socket or real-time logic.
+   - Ensure **audio and video calls work flawlessly**, using Agora or the current implementation.
+   - Calls must connect instantly and reliably between both users.
+
+2. **Voice Note Fix:**
+   - Fix the issue preventing users from sending **voice notes**.
+   - Ensure proper **audio recording, upload (e.g., to Firebase or backend), and real-time delivery/playback** on the receiver side.
+
+3. **Real-time Messaging Delay:**
+   - Fix the issue where new messages only appear after refreshing or re-entering the chat screen.
+   - Implement **real-time listeners (e.g., Firestore snapshot listener or WebSocket)** so messages appear **immediately on both ends**.
+
+---
+
+### 🎨 Massive UI/UX Redesign (Complete Overhaul)
+
+Perform a **total revamp of the entire UI of the app** across all screens and components.
+
+- ✅ **Use more SVGs, custom icons, illustrations, and design assets** that elevate the overall look.
+- ✅ Apply **modern, animated, aesthetic card layouts** (e.g., glassmorphism, neumorphism, shadows, gradients).
+- ✅ Ensure buttons, text fields, and modals have **hover effects, press animations, and smooth transitions**.
+
+🔵 Adopt the new app theme colors:
+- White (backgrounds and primary base)
+- Dark Gold (for accent elements, highlights, buttons)
+- Navy Blue (for UI elements, text, icon containers)
+
+🎯 Specific UI upgrades:
+- Revamp **calling screens** (incoming, outgoing, in-call):
+  - Functional buttons: mute, camera toggle, speaker, end call
+  - Caller photo, name, and call type (audio/video)
+  - Use **custom icons and illustrations** in calling UI
+- Upgrade **chat screens**:
+  - Include avatars, timestamps, chat bubbles with animation
+  - Integrate **SVG icons** for voice notes, reactions, reply, forward
+- Make **navigation bar, drawer, profile, and settings** look premium, aesthetic, and modern.
+
+🧪 Ensure **every screen and component is updated**, including:
+- Auth (Login/Register/Forgot)
+- Chat & Messages
+- Calls (Audio/Video)
+- Profiles
+- Onboarding (if any)
+- Any custom modals, dialogs, lists
+
+---
+
+### 🧼 Clean-Up and Optimization
+
+- Delete either `ActivitiesScreen` or `StatusScreen` (whichever exists):
+  - Remove all related components, packages, data hooks, navigation routes, assets.
+  - **Nothing related to solo games or activities** should remain.
+
+- Remove all **unused packages and assets**:
+  - Clean up dependencies to make the app **lightweight and faster**.
+  - Confirm all **builds work cleanly** with no leftover imports or references.
+
+---
+
+### ✅ Syntax, Code Integrity & Final Checks
+
+- Run through all updated files to **ensure no syntax or runtime errors**.
+- Update all code that depends on the refactored UI, packages, and logic.
+- Guarantee all core functionalities are intact:
+  - ✅ Login & Register
+  - ✅ Real-time Chat
+  - ✅ Voice Notes
+  - ✅ Audio/Video Calling
+  - ✅ Profile, Settings, Navigation
+
+- Confirm the app builds successfully for both Android and iOS.
+- **Final build should be clean, stable, and visually stunning.**
+
+---
+
+Now proceed with all the above changes in one go.
