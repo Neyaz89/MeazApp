@@ -13,7 +13,8 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    View
+    View,
+    Alert
 } from 'react-native';
 import Svg, { Defs, Ellipse, LinearGradient, Path, Stop } from 'react-native-svg';
 import { useToast } from '../components/ui/Toast';
@@ -67,7 +68,7 @@ export default function ProfileScreen() {
   // 1. Add state for full friend objects
   const [profileFriends, setProfileFriends] = useState<any[]>([]);
   const [friendsModal, setFriendsModal] = useState(false);
-  const { signOut } = useAuthStore();
+  const { signOut, blockUser, reportUser } = useAuthStore();
   const [settingsModal, setSettingsModal] = useState(false);
 
   // Determine whose profile to show
@@ -646,6 +647,64 @@ export default function ProfileScreen() {
             >
               <Ionicons name="videocam-outline" size={18} color="#00bfae" style={{ marginRight: 8 }} />
               <Text style={{ color: '#00bfae', fontWeight: 'bold' }}>Video Call</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: blocked ? '#FFD700' : '#FF3B30',
+                borderRadius: 18,
+                paddingVertical: 8,
+                paddingHorizontal: 22,
+                marginHorizontal: 6,
+                flexDirection: 'row',
+                alignItems: 'center',
+                shadowColor: '#FF3B30',
+                shadowOpacity: 0.12,
+                shadowRadius: 6,
+                elevation: 2,
+              }}
+              onPress={() => {
+                if (blocked) {
+                  // TODO: Unblock logic
+                  blockUser(profile.id); // For now, just call blockUser again
+                } else {
+                  Alert.alert('Block User', `Block @${profile.username}? They won't be able to message or call you.`, [
+                    { text: 'Cancel', style: 'cancel' },
+                    { text: 'Block', style: 'destructive', onPress: () => blockUser(profile.id) },
+                  ]);
+                }
+              }}
+            >
+              <Ionicons name={blocked ? 'remove-circle-outline' : 'ban-outline'} size={18} color="#fff" style={{ marginRight: 8 }} />
+              <Text style={{ color: '#fff', fontWeight: 'bold' }}>{blocked ? 'Unblock' : 'Block'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#FFD700',
+                borderRadius: 18,
+                paddingVertical: 8,
+                paddingHorizontal: 22,
+                marginHorizontal: 6,
+                flexDirection: 'row',
+                alignItems: 'center',
+                shadowColor: '#FFD700',
+                shadowOpacity: 0.12,
+                shadowRadius: 6,
+                elevation: 2,
+              }}
+              onPress={() => {
+                Alert.prompt(
+                  'Report User',
+                  `Why are you reporting @${profile.username}?`,
+                  [
+                    { text: 'Cancel', style: 'cancel' },
+                    { text: 'Report', style: 'destructive', onPress: (reason) => reportUser(profile.id, reason || 'No reason provided') },
+                  ],
+                  'plain-text'
+                );
+              }}
+            >
+              <Ionicons name="alert-circle-outline" size={18} color="#fff" style={{ marginRight: 8 }} />
+              <Text style={{ color: '#fff', fontWeight: 'bold' }}>Report</Text>
             </TouchableOpacity>
           </>
         )}
