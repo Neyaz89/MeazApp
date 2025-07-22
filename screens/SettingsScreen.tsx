@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Switch, ScrollView, Animated, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Switch, ScrollView, Animated, Dimensions, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -11,6 +11,8 @@ import { ThemedText } from '../components/ThemedText';
 import { useTheme, FontSize, ColorBlindMode } from '../components/ThemeContext';
 import { Colors } from '../constants/Colors';
 import { PrivacyControls } from '../components/privacy/PrivacyControls';
+import { useAuthStore } from '../store/authStore';
+import { Button } from '../components/Button';
 
 const { width } = Dimensions.get('window');
 
@@ -21,6 +23,7 @@ const SettingsScreen = () => {
   const [vibrationEnabled, setVibrationEnabled] = useState(true);
   const [showPrivacyControls, setShowPrivacyControls] = useState(false);
   const { theme, setTheme, fontSize, setFontSize, colorBlindMode, setColorBlindMode } = useTheme();
+  const { user, signOut, deleteAccount, isLoading, error, resendVerificationEmail } = useAuthStore();
   const themeColors = Colors[theme] || Colors.light;
   const fadeAnim = new Animated.Value(0);
   const scaleAnim = new Animated.Value(0.95);
@@ -353,6 +356,37 @@ const SettingsScreen = () => {
                 </LinearGradient>
               </BlurView>
             </View>
+
+            {/* Account Actions */}
+            <View style={styles.section}>
+              <View style={styles.sectionHeader}>
+                <LinearGradient
+                  colors={['#D4A574', '#C8956D']}
+                  style={styles.sectionIconContainer}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                >
+                  <Ionicons name="person" size={18} color="#FFFFFF" />
+                </LinearGradient>
+                <ThemedText style={styles.sectionTitle}>Account Actions</ThemedText>
+              </View>
+              {user && !user.email_confirmed && (
+                <View style={styles.row}>
+                  <ThemedText style={styles.warningText}>Email not verified</ThemedText>
+                  <Button title="Resend Verification" onPress={resendVerificationEmail} />
+                </View>
+              )}
+              <Button
+                title="Delete Account"
+                color="#FF3B30"
+                onPress={() => {
+                  Alert.alert('Delete Account', 'Are you sure you want to delete your account? This cannot be undone.', [
+                    { text: 'Cancel', style: 'cancel' },
+                    { text: 'Delete', style: 'destructive', onPress: deleteAccount },
+                  ]);
+                }}
+              />
+            </View>
           </ScrollView>
 
           {/* Privacy Controls Modal */}
@@ -677,6 +711,18 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 12,
+    marginBottom: 12,
+  },
+  warningText: {
+    fontSize: 14,
+    color: '#FF3B30',
+    fontWeight: '600',
   },
 });
 

@@ -112,6 +112,10 @@ interface AuthStore {
   initializeAuth: () => Promise<void>;
   initialize: () => Promise<void>;
   cleanup: () => void;
+  deleteAccount: () => Promise<void>;
+  resendVerificationEmail: () => Promise<void>;
+  blockUser: (userId: string) => Promise<void>;
+  reportUser: (userId: string, reason: string) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthStore>((set, get) => ({
@@ -674,6 +678,42 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       console.error('Auth initialization error:', errorMessage);
       set({ isLoading: false, error: errorMessage, isInitialized: true });
     }
+  },
+  deleteAccount: async () => {
+    set({ isLoading: true });
+    try {
+      const { user } = get();
+      if (!user) throw new Error('No user logged in');
+      // Delete user from Supabase Auth
+      const { error: authError } = await supabase.auth.admin.deleteUser(user.id);
+      if (authError) throw authError;
+      // Delete user profile
+      await supabase.from('users').delete().eq('id', user.id);
+      await AsyncStorage.removeItem('@auth_session');
+      set({ user: null, isAuthenticated: false, isLoading: false, error: null });
+    } catch (error) {
+      set({ isLoading: false, error: error.message });
+    }
+  },
+  resendVerificationEmail: async () => {
+    set({ isLoading: true });
+    try {
+      const { user } = get();
+      if (!user) throw new Error('No user logged in');
+      await supabase.auth.resend({ type: 'signup', email: user.email });
+      showToast('Verification email sent!');
+      set({ isLoading: false });
+    } catch (error) {
+      set({ isLoading: false, error: error.message });
+    }
+  },
+  blockUser: async (userId: string) => {
+    // TODO: Implement block user logic
+    showToast('User blocked (stub)');
+  },
+  reportUser: async (userId: string, reason: string) => {
+    // TODO: Implement report user logic
+    showToast('User reported (stub)');
   },
 }));
 
