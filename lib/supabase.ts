@@ -2,28 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
 import * as FileSystem from 'expo-file-system';
 
-// Use process.env for Expo/React Native
-const supabaseUrl = 'https://orupcxnygtgofvvwhpmz.supabase.co';
-const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ydXBjeG55Z3Rnb2Z2dndocG16Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3MDY1NDMsImV4cCI6MjA2NzI4MjU0M30.DC6i0QyQlwaKf3ZUBNSLWjXIX_RsHwFtpnzSnQrh1Dw';
+const supabaseUrl = process.env.SUPABASE_URL!;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY!;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables. Please check your app.json or .env file.');
-}
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    storage: AsyncStorage,
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: false,
-    flowType: 'pkce',
-  },
-  realtime: {
-    params: {
-      eventsPerSecond: 10,
-    },
-  },
-});
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Database types for Meaz app - Updated with advanced features
 export interface Database {

@@ -1,50 +1,43 @@
-# Welcome to your Expo app 👋
+# Meaz
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A real-time social media + chat mobile app built with React Native (TypeScript), Supabase (Auth, Realtime DB, Storage), and Agora (voice/video calling).
 
-## Get started
+## 🌈 Design System
+- **App Name**: Meaz
+- **Logo**: Stylish "NM" letters (modern, bold)
+- **Theme Colors**:
+  - Primary: White `#FFFFFF`
+  - Secondary: Gold `#FFD700`
+  - Accent: Royal Blue `#4169E1`
+- **Design Principles**: Modern squaric layouts, stylish SVG icons, rounded cards, gradient backgrounds, soft shadows, glassmorphism, responsive, minimal UI, animated transitions.
 
-1. Install dependencies
+## ✅ Core Features
+- Account management (Supabase Auth)
+- Friends system (requests, streaks, online status)
+- Real-time chat (text, images, voice, video, emojis, reactions, unsend, seen, typing, etc.)
+- Snaps system (timed, screenshot alert, streaks, archive, expiry)
+- Stories (square layout, image/video/text, reactions, highlights, drafts)
+- Voice/video calling (Agora)
+- Media upload (Supabase Storage, compression, progress)
+- Stories Feed (Explore replacement, trending, filters)
+- Profile page (bio, status, stories, streaks, archive)
+- Notifications (Supabase Edge Functions)
+- Search (friends, stories, usernames)
+- Security & moderation (block, report, NSFW scan, RLS)
+- Extra mini features (auto logout, intro, suggestions, dark/light mode, offline, last seen, read receipts, privacy, pin chats, group creation)
 
-   ```bash
-   npm install
-   ```
+## 🧱 Tech Stack
+- React Native (TypeScript), Expo
+- Supabase (Auth, DB, Realtime, Storage)
+- Agora SDK (Voice/Video)
+- Zustand
+- ShadCN + Custom SVGs + TailwindCSS (NativeWind)
+- Formik + Yup, react-native-gesture-handler, react-native-reanimated, react-native-svg, react-native-fast-image, react-query
 
-2. Start the app
+## Setup
+1. Copy `.env.example` to `.env` and fill in your Supabase and Agora keys.
+2. Install dependencies: `npm install`
+3. Start: `npx expo start`
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Contribution
+All features must be fully functional, modular, and well-documented. See `/docs` for architecture and feature guides.
